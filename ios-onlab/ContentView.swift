@@ -1,16 +1,36 @@
 //
 //  ContentView.swift
-//  ios-onlab
+//  tvDB swiftUI
 //
-//  Created by Morvay Balázs on 2020. 03. 09..
+//  Created by Morvay Balázs on 2020. 02. 20..
 //  Copyright © 2020. BME AUT. All rights reserved.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var title: String = "Előre"
+    @State private var score: String = "?"
+    
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Text("TVDB").foregroundColor(.red).font(.largeTitle)
+            HStack {
+                TextField("Title:", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
+                Text("IMDB score: \(score)")
+            }.padding()
+            Button(action: {
+                let idData = Request.getID(for: self.title)
+                let idRequest = try! JSONDecoder().decode(IDInfo.self, from: idData!)
+                print(idRequest)
+                let data = Request.makeRequest(with: idRequest.titles[0].id)
+                let movie = try! JSONDecoder().decode(Movie.self, from: data!)
+                self.score = movie.IMDBRating
+            }) {
+                Text("Search")
+            }.foregroundColor(.blue).font(.body).cornerRadius(CGFloat(0.33))
+        }
     }
 }
 
