@@ -16,7 +16,19 @@ struct MovieView: View {
     var body: some View {
         VStack {
             Image(uiImage: poster)
-            Text("")
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 4))
+                .shadow(radius: 10)
+            Text(movie.title)
+                .font(.largeTitle)
+                .fontWeight(.semibold)
+                .padding([.top, .leading, .trailing])
+                .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+            Text(movie.IMDBRating)
+                .font(.title)
+                .fontWeight(.light)
+                .foregroundColor(Color.black)
+                .shadow(radius: 20)
         }.onAppear() {
             self.poster = getPosterImage(from: self.movie.poster)
         }
