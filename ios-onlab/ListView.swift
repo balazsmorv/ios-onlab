@@ -25,8 +25,9 @@ struct ListView: View {
                     HStack {
                         Text(section.title).frame(alignment: .leading)
                         Spacer()
-                    Text(section.IMDBRating).font(.headline).fontWeight(.bold).foregroundColor(Color.blue).multilineTextAlignment(.leading).scaledToFit().opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                        Text(section.IMDBRating).font(.headline).fontWeight(.bold).foregroundColor(Color.blue).multilineTextAlignment(.leading).scaledToFit().opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/).shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                     }
+                    .padding(.leading)
                 }
             }.navigationBarTitle("What to watch")
         }

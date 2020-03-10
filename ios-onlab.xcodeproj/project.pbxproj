@@ -18,6 +18,7 @@
 		A419BAA62416E55800D24472 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA02416E55800D24472 /* Movie.swift */; };
 		A419BAA72416E55800D24472 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA22416E55800D24472 /* Request.swift */; };
 		A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */; };
+		A4A09CB1241832AC007A03D0 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A09CB0241832AC007A03D0 /* MovieView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		A419BAA12416E55800D24472 /* IDInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IDInfo.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/IDInfo.swift"; sourceTree = "<absolute>"; };
 		A419BAA22416E55800D24472 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Request.swift"; sourceTree = "<absolute>"; };
 		A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios6styleButton.swift; sourceTree = "<group>"; };
+		A4A09CB0241832AC007A03D0 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				A419BAA12416E55800D24472 /* IDInfo.swift */,
 				A419BA9F2416E55800D24472 /* ListView.swift */,
 				A419BAA02416E55800D24472 /* Movie.swift */,
+				A4A09CB0241832AC007A03D0 /* MovieView.swift */,
 				A419BAA22416E55800D24472 /* Request.swift */,
 				A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */,
 				A419BA8A2416E4AF00D24472 /* AppDelegate.swift */,
@@ -165,6 +168,7 @@
 				A419BA8B2416E4AF00D24472 /* AppDelegate.swift in Sources */,
 				A419BAA62416E55800D24472 /* Movie.swift in Sources */,
 				A419BAA52416E55800D24472 /* ListView.swift in Sources */,
+				A4A09CB1241832AC007A03D0 /* MovieView.swift in Sources */,
 				A419BAA72416E55800D24472 /* Request.swift in Sources */,
 				A419BAA42416E55800D24472 /* ContentView.swift in Sources */,
 				A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */,
