@@ -17,6 +17,7 @@
 		A419BAA52416E55800D24472 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BA9F2416E55800D24472 /* ListView.swift */; };
 		A419BAA62416E55800D24472 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA02416E55800D24472 /* Movie.swift */; };
 		A419BAA72416E55800D24472 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA22416E55800D24472 /* Request.swift */; };
+		A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A419BAA02416E55800D24472 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Movie.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Movie.swift"; sourceTree = "<absolute>"; };
 		A419BAA12416E55800D24472 /* IDInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IDInfo.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/IDInfo.swift"; sourceTree = "<absolute>"; };
 		A419BAA22416E55800D24472 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Request.swift"; sourceTree = "<absolute>"; };
+		A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios6styleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				A419BA9F2416E55800D24472 /* ListView.swift */,
 				A419BAA02416E55800D24472 /* Movie.swift */,
 				A419BAA22416E55800D24472 /* Request.swift */,
+				A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */,
 				A419BA8A2416E4AF00D24472 /* AppDelegate.swift */,
 				A419BA8C2416E4AF00D24472 /* SceneDelegate.swift */,
 				A419BA902416E4B100D24472 /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 				A419BAA52416E55800D24472 /* ListView.swift in Sources */,
 				A419BAA72416E55800D24472 /* Request.swift in Sources */,
 				A419BAA42416E55800D24472 /* ContentView.swift in Sources */,
+				A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */,
 				A419BA8D2416E4AF00D24472 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

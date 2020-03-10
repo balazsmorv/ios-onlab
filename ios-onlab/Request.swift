@@ -95,6 +95,14 @@ class Request {
         
     }
     
+    static func getMovie(for title: String) -> Movie {
+        let idData = Request.getID(for: title)
+        let idRequest = try! JSONDecoder().decode(IDInfo.self, from: idData!)
+        let data = Request.makeRequest(with: idRequest.titles[0].id)
+        let movie = try! JSONDecoder().decode(Movie.self, from: data!)
+        return movie
+    }
+    
     
     
 }

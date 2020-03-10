@@ -25,7 +25,7 @@ struct ListView: View {
                     HStack {
                         Text(section.title).frame(alignment: .leading)
                         Spacer()
-                        Text(section.IMDBRating).scaledToFit()
+                    Text(section.IMDBRating).font(.headline).fontWeight(.bold).foregroundColor(Color.blue).multilineTextAlignment(.leading).scaledToFit().opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
                     }
                 }
             }.navigationBarTitle("What to watch")

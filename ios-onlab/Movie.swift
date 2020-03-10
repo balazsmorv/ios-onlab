@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie: Codable {
+struct Movie: Codable, Identifiable {
     
     let title: String
     let year: String
@@ -29,6 +29,7 @@ struct Movie: Codable {
     let IMDBNumberOfVotes: String
     let IMDBid: String
     let type: String
+    let id = UUID()
     
     enum CodingKeys: String, CodingKey {
         case title = "Title"
@@ -50,5 +51,6 @@ struct Movie: Codable {
         case IMDBNumberOfVotes = "imdbVotes"
         case IMDBid = "imdbID"
         case type = "Type"
+        
     }
 }

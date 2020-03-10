@@ -10,14 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var title: String = "Előre"
+    @State private var title: String = ""
     @State private var score: String = "?"
     
     var body: some View {
         VStack {
             Text("TVDB").foregroundColor(.red).font(.largeTitle)
             HStack {
-                TextField("Title:", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
+                TextField("Movie or series", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
                 Text("IMDB score: \(score)")
             }.padding()
             Button(action: {
@@ -29,7 +29,10 @@ struct ContentView: View {
                 self.score = movie.IMDBRating
             }) {
                 Text("Search")
-            }.foregroundColor(.blue).font(.body).cornerRadius(CGFloat(0.33))
+            }
+            .foregroundColor(.blue).font(.body)
+            .cornerRadius(CGFloat(0.33))
+            
         }
     }
 }
