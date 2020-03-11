@@ -17,7 +17,7 @@ struct MovieView: View {
         VStack {
             Image(uiImage: poster)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 4))
+                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray.opacity(0.3), lineWidth: 4))
                 .shadow(radius: 10)
             Text(movie.title)
                 .font(.largeTitle)
@@ -37,7 +37,7 @@ struct MovieView: View {
 
 struct MovieView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieView(movie: Request.getMovie(for: "Matrix"))
+        MovieView(movie: Request.getMovie(for: "Agymenok"))
     }
 }
 
