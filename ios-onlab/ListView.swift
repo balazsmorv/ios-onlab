@@ -22,25 +22,13 @@ struct ListView: View {
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(filmList) { section in
-                    HStack {
-                        Image(uiImage: getPosterImage(from: section.poster))
-                        .resizable()
-                        .frame(width: 40.0, height: 40.0, alignment: .center)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray.opacity(0.3), lineWidth: 4))
-                        .shadow(radius: 10)
-
-                        Text(section.title).frame(alignment: .leading)
-                        Spacer()
-                
-                    Text(section.IMDBRating).font(.headline).fontWeight(.bold).foregroundColor(Color.blue).multilineTextAlignment(.leading).scaledToFit().opacity(0.8).shadow(radius: 10)
-                    }
-                    .padding(.leading).padding(.trailing)
+            List(filmList) { film in
+                NavigationLink(destination: MovieView(movie: film)) {
+                    MovieListRowView(movie: film)
                 }
             }.navigationBarTitle("What to watch")
         }
+        .padding()
     }
 }
 

@@ -17,6 +17,7 @@
 		A419BAA52416E55800D24472 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BA9F2416E55800D24472 /* ListView.swift */; };
 		A419BAA62416E55800D24472 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA02416E55800D24472 /* Movie.swift */; };
 		A419BAA72416E55800D24472 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = A419BAA22416E55800D24472 /* Request.swift */; };
+		A4430951241928E200E6B1DC /* MovieListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4430950241928E200E6B1DC /* MovieListRowView.swift */; };
 		A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */; };
 		A4A09CB1241832AC007A03D0 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A09CB0241832AC007A03D0 /* MovieView.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,8 @@
 		A419BAA02416E55800D24472 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Movie.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Movie.swift"; sourceTree = "<absolute>"; };
 		A419BAA12416E55800D24472 /* IDInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IDInfo.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/IDInfo.swift"; sourceTree = "<absolute>"; };
 		A419BAA22416E55800D24472 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Request.swift; path = "/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Request.swift"; sourceTree = "<absolute>"; };
+		A4430950241928E200E6B1DC /* MovieListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListRowView.swift; sourceTree = "<group>"; };
+		A44309522419307B00E6B1DC /* ios-onlab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-onlab.entitlements"; sourceTree = "<group>"; };
 		A4A09CAE2417E42D007A03D0 /* ios6styleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios6styleButton.swift; sourceTree = "<group>"; };
 		A4A09CB0241832AC007A03D0 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,9 +71,11 @@
 		A419BA892416E4AF00D24472 /* ios-onlab */ = {
 			isa = PBXGroup;
 			children = (
+				A44309522419307B00E6B1DC /* ios-onlab.entitlements */,
 				A419BA9E2416E55800D24472 /* ContentView.swift */,
 				A419BAA12416E55800D24472 /* IDInfo.swift */,
 				A419BA9F2416E55800D24472 /* ListView.swift */,
+				A4430950241928E200E6B1DC /* MovieListRowView.swift */,
 				A419BAA02416E55800D24472 /* Movie.swift */,
 				A4A09CB0241832AC007A03D0 /* MovieView.swift */,
 				A419BAA22416E55800D24472 /* Request.swift */,
@@ -170,6 +175,7 @@
 				A419BAA52416E55800D24472 /* ListView.swift in Sources */,
 				A4A09CB1241832AC007A03D0 /* MovieView.swift in Sources */,
 				A419BAA72416E55800D24472 /* Request.swift in Sources */,
+				A4430951241928E200E6B1DC /* MovieListRowView.swift in Sources */,
 				A419BAA42416E55800D24472 /* ContentView.swift in Sources */,
 				A4A09CAF2417E42D007A03D0 /* ios6styleButton.swift in Sources */,
 				A419BA8D2416E4AF00D24472 /* SceneDelegate.swift in Sources */,
@@ -308,17 +314,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "ios-onlab/ios-onlab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ios-onlab/Preview Content\"";
 				DEVELOPMENT_TEAM = RTG93BKR37;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ios-onlab/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hu.bme.aut.ios-onlab";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -328,17 +338,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "ios-onlab/ios-onlab.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"ios-onlab/Preview Content\"";
 				DEVELOPMENT_TEAM = RTG93BKR37;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "ios-onlab/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hu.bme.aut.ios-onlab";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
