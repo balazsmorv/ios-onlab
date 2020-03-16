@@ -88,6 +88,9 @@ class Request {
         
         var timer = 0
         while returnData == nil {
+            if timer % 100000 == 0 {
+                print("\(timer) cycle done for film: \(title)")
+            }
             timer += 1
         }
         
