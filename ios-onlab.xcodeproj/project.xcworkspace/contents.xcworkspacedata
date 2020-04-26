@@ -2,21 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/ContentView.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/IDInfo.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/ListView.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Movie.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/morvaybalazs1/Documents/onlab/ios-onlab/ios-onlab/Request.swift">
-   </FileRef>
-   <FileRef
       location = "self:ios-onlab.xcodeproj">
    </FileRef>
 </Workspace>

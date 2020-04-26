@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit // for the poster picture
+import Combine
 
-struct Movie: Codable, Identifiable {
+class Movie: Codable, Identifiable, ObservableObject {
     
     let title: String
     let year: String
@@ -31,6 +33,8 @@ struct Movie: Codable, Identifiable {
     let type: String
     let id = UUID()
     
+    @Published var image: UIImage = #imageLiteral(resourceName: "posterNotFound")
+    
     enum CodingKeys: String, CodingKey {
         case title = "Title"
         case year = "Year"
@@ -51,6 +55,120 @@ struct Movie: Codable, Identifiable {
         case IMDBNumberOfVotes = "imdbVotes"
         case IMDBid = "imdbID"
         case type = "Type"
-        
     }
+    
+    func getPosterImage(from urlString: String) {
+        print("trying to get poster images")
+        if let url = URL(string: urlString) {
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    self.image = image
+                    print("got image")
+                }
+            } else {
+                print("no poster data")
+            }
+        }
+    }
+}
+
+
+
+
+
+class MovieList: ObservableObject {
+    
+    @Published var items = [Movie]()
+    
+    init(with titles: [String]) {
+        for movie in titles {
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.makeRequest(for: movie)
+            }
+        }
+    }
+    
+    
+
+    
+    private func requestData(with imdbID: String) {
+        let headers = [
+            "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
+            "x-rapidapi-key": "936907b99fmshb8b8ce9f592618bp14616ajsnc7cb6f502808"
+        ]
+
+        let url = "https://movie-database-imdb-alternative.p.rapidapi.com/?i=" + imdbID + "&r=json"
+        let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
+            cachePolicy: .useProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                if data != nil {
+                    let movie = try! JSONDecoder().decode(Movie.self, from: data!)
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        movie.getPosterImage(from: movie.title)
+                        DispatchQueue.main.async {
+                            self.items.append(movie)
+                            print("items appended with \(movie.title)")
+                        }
+                    }
+                    
+                } else {
+                    print("data is nil.")
+                }
+            }
+        })
+        
+        dataTask.resume()
+
+    }
+    
+    
+    private func makeRequest(for title: String) {
+        
+        print("making request for title: \(title)")
+        
+        let headers = [
+            "x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com",
+            "x-rapidapi-key": "936907b99fmshb8b8ce9f592618bp14616ajsnc7cb6f502808"
+        ]
+
+        let original = "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + title
+        
+        let encoded = original.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
+        let url = URL(string: encoded!)
+        
+        let request = NSMutableURLRequest(url: url!,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+
+        request.httpMethod = "GET"
+        request.allHTTPHeaderFields = headers
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error!)
+            } else {
+                if data != nil {
+                    let idRequest = try! JSONDecoder().decode(IDInfo.self, from: data!)
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        print("request data for \(title)")
+                        self.requestData(with: idRequest.titles[0].id)
+                    }
+                }
+            }
+        })
+
+        
+        dataTask.resume()
+            
+    }
+    
 }

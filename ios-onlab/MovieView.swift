@@ -8,14 +8,16 @@
 
 import SwiftUI
 
+var list = MovieList(with: ["Matrix", "Agymenok"])
+
+
 struct MovieView: View {
     
-    @State var movie: Movie
-    @State var poster = UIImage()
+    @ObservedObject var movie: Movie
     
     var body: some View {
         VStack {
-            Image(uiImage: poster)
+            Image(uiImage: movie.image)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray.opacity(0.3), lineWidth: 4))
                 .shadow(radius: 10)
@@ -29,32 +31,14 @@ struct MovieView: View {
                 .fontWeight(.light)
                 .foregroundColor(Color.black)
                 .shadow(radius: 20)
-        }.onAppear() {
-            self.poster = getPosterImage(from: self.movie.poster)
         }
     }
 }
 
 struct MovieView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieView(movie: Request.getMovie(for: "Agymenok"))
+        MovieView(movie: list.items[0])
     }
 }
 
 
-func getPosterImage(from urlString: String) -> UIImage {
-    if let url = URL(string: urlString) {
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                return image
-            } else {
-                return UIImage(named: "posterNotFound")!
-            }
-        } else {
-            return UIImage(named: "posterNotFound")!
-        }
-        
-    } else {
-        return UIImage(named: "posterNotFound")!
-    }
-}
