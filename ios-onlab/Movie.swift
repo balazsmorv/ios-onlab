@@ -68,6 +68,8 @@ class Movie: Codable, Identifiable, ObservableObject {
             } else {
                 print("no poster data")
             }
+        } else {
+            print("url not correct: \(urlString)")
         }
     }
 }
@@ -87,10 +89,7 @@ class MovieList: ObservableObject {
             }
         }
     }
-    
-    
 
-    
     private func requestData(with imdbID: String) {
         let headers = [
             "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
@@ -111,12 +110,11 @@ class MovieList: ObservableObject {
             } else {
                 if data != nil {
                     let movie = try! JSONDecoder().decode(Movie.self, from: data!)
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        movie.getPosterImage(from: movie.title)
-                        DispatchQueue.main.async {
-                            self.items.append(movie)
-                            print("items appended with \(movie.title)")
-                        }
+                    movie.getPosterImage(from: movie.poster)
+                    DispatchQueue.main.async {
+                        self.items.append(movie)
+                        self.items.sort {$0.IMDBRating > $1.IMDBRating}
+                        print("items appended with \(movie.title)")
                     }
                     
                 } else {
@@ -166,9 +164,7 @@ class MovieList: ObservableObject {
             }
         })
 
-        
         dataTask.resume()
-            
     }
     
 }
