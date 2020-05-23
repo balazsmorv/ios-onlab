@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-var list = MovieList(with: ["Matrix", "Agymenok"])
+var list = MovieList()
 
 
 struct MovieView: View {

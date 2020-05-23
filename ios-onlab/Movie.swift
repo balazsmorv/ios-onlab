@@ -80,12 +80,21 @@ class Movie: Codable, Identifiable, ObservableObject {
 
 class MovieList: ObservableObject {
     
+    var currentRequestNumber = 0
+    
     @Published var items = [Movie]()
     
-    init(with titles: [String]) {
-        for movie in titles {
+    init() {
+        let tvGuide = TVGuide()
+        tvGuide.fillTVGuide()
+        for movie in tvGuide.getCurrentTitles() {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.makeRequest(for: movie)
+            }
+            // TODO: avoid time out errors
+            do {
+                print("sleep for 1 sec") // not to get time out errors
+                //sleep(1)
             }
         }
     }
@@ -105,16 +114,20 @@ class MovieList: ObservableObject {
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            self.currentRequestNumber -= 1
             if (error != nil) {
                 print(error!)
             } else {
                 if data != nil {
-                    let movie = try! JSONDecoder().decode(Movie.self, from: data!)
-                    movie.getPosterImage(from: movie.poster)
-                    DispatchQueue.main.async {
-                        self.items.append(movie)
-                        self.items.sort {$0.IMDBRating > $1.IMDBRating}
-                        print("items appended with \(movie.title)")
+                    if let movie = try? JSONDecoder().decode(Movie.self, from: data!) {
+                        movie.getPosterImage(from: movie.poster)
+                        DispatchQueue.main.async {
+                            self.items.append(movie)
+                            self.items.sort {$0.IMDBRating > $1.IMDBRating}
+                            //print("items appended with \(movie.title)")
+                        }
+                    } else {
+                        print("crash would have happened")
                     }
                     
                 } else {
@@ -129,6 +142,8 @@ class MovieList: ObservableObject {
     
     
     private func makeRequest(for title: String) {
+        
+        currentRequestNumber += 1
         
         print("making request for title: \(title)")
         
@@ -155,10 +170,15 @@ class MovieList: ObservableObject {
                 print(error!)
             } else {
                 if data != nil {
-                    let idRequest = try! JSONDecoder().decode(IDInfo.self, from: data!)
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        print("request data for \(title)")
-                        self.requestData(with: idRequest.titles[0].id)
+                    if let idRequest = try? JSONDecoder().decode(IDInfo.self, from: data!) {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            print("request data for \(title)")
+                            if(idRequest.titles.count > 0) {
+                                self.requestData(with: idRequest.titles[0].id)
+                            } else {
+                                print("no title: \(title) found on imdb ")
+                            }
+                        }
                     }
                 }
             }

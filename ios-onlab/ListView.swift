@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ListView: View {
     
-    @ObservedObject var movies = MovieList(with: ["Agymenok", "Matrix", "CSI: Miami", "Castle", "Lucifer"])
+    
+    @ObservedObject var movies = MovieList()
 
     var body: some View {
         NavigationView {
