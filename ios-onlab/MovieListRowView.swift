@@ -33,6 +33,6 @@ struct MovieListRowView: View {
 
 struct MovieListRowView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieListRowView(movie: list.items[0])
+        MovieListRowView(movie: Movie())
     }
 }

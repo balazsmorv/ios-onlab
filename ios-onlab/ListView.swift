@@ -10,8 +10,7 @@ import SwiftUI
 
 struct ListView: View {
     
-    
-    @ObservedObject var movies = MovieList()
+    @EnvironmentObject var movies: MovieList
 
     var body: some View {
         NavigationView {
@@ -21,7 +20,7 @@ struct ListView: View {
                 }
             }.navigationBarTitle("What to watch")
         }
-        .padding()
+        
     }
 }
 

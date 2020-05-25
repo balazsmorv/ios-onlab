@@ -10,9 +10,11 @@ import Foundation
 import UIKit // for the poster picture
 import Combine
 
+//Egy TV-ben futó műsorról tárol infókat
 class Movie: Codable, Identifiable, ObservableObject {
     
     let title: String
+    var channel = "TinaTV"
     let year: String
     let rated: String
     let released: String // date would be better
@@ -35,6 +37,30 @@ class Movie: Codable, Identifiable, ObservableObject {
     
     @Published var image: UIImage = #imageLiteral(resourceName: "posterNotFound")
     
+    init() {
+        title = "Tina feneke"
+        channel = "TinaTV"
+        year = "Year"
+        rated = "Rated"
+        released = "Released"
+        runtime = "Runtime"
+        genre = "Genre"
+        director = "Director"
+        writers = "Writer"
+        actors = "Actors"
+        plot = "Plot"
+        language = "Language"
+        country = "Country"
+        awards = "Awards"
+        poster = "Poster"
+        IMDBRating = "100"
+        Metascore = "Metascore"
+        IMDBNumberOfVotes = "imdbVotes"
+        IMDBid = "imdbID"
+        type = "Type"
+    }
+    
+    // JSON dekódoláshoz
     enum CodingKeys: String, CodingKey {
         case title = "Title"
         case year = "Year"
@@ -57,6 +83,7 @@ class Movie: Codable, Identifiable, ObservableObject {
         case type = "Type"
     }
     
+    // posztert tölti le paraméterben kapott url alapján
     func getPosterImage(from urlString: String) {
         print("trying to get poster images")
         if let url = URL(string: urlString) {
@@ -75,31 +102,34 @@ class Movie: Codable, Identifiable, ObservableObject {
 }
 
 
-
-
-
+// Fenti Movie osztályokat összegyűjti tömbbe, kezeli az imdb lekérdezéseket hozzájuk
 class MovieList: ObservableObject {
     
-    var currentRequestNumber = 0
-    
+    // Az összes kiírandó TV műsor
     @Published var items = [Movie]()
+    // Az összes TV csatorna amire rá lehet szűrni
+    @Published var availableChannels = [Channel]()
+    // TVGuide kezeli a műsorinformációk letöltését, és átalakítását
+    let tvGuide = TVGuide()
     
     init() {
-        let tvGuide = TVGuide()
-        tvGuide.fillTVGuide()
+        self.fillUp()
+    }
+    
+    func fillUp() {
+        tvGuide.fillTVGuide(requested_by: self)
+    }
+    
+    func fillUpList() {
         for movie in tvGuide.getCurrentTitles() {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.makeRequest(for: movie)
             }
-            // TODO: avoid time out errors
-            do {
-                print("sleep for 1 sec") // not to get time out errors
-                //sleep(1)
-            }
         }
     }
 
-    private func requestData(with imdbID: String) {
+    // 2. API: kapott IMDB ID-ra keres rá IMDB-n, és a visszakapott adatokból Movie példányt készít, eltárolja őket az items tömbben
+    private func requestData(with imdbID: String, for program: TVProgramme) {
         let headers = [
             "x-rapidapi-host": "movie-database-imdb-alternative.p.rapidapi.com",
             "x-rapidapi-key": "936907b99fmshb8b8ce9f592618bp14616ajsnc7cb6f502808"
@@ -114,24 +144,23 @@ class MovieList: ObservableObject {
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            self.currentRequestNumber -= 1
             if (error != nil) {
                 print(error!)
             } else {
                 if data != nil {
                     if let movie = try? JSONDecoder().decode(Movie.self, from: data!) {
                         movie.getPosterImage(from: movie.poster)
+                        movie.channel = program.channel
                         DispatchQueue.main.async {
                             self.items.append(movie)
                             self.items.sort {$0.IMDBRating > $1.IMDBRating}
-                            //print("items appended with \(movie.title)")
                         }
                     } else {
-                        print("crash would have happened")
+                        print("Movie.requestData(with imdbID: \(imdbID)): couldnt decode JSON data to Movie instance")
                     }
                     
                 } else {
-                    print("data is nil.")
+                    print("Movie.requestData(with imdbID: \(imdbID)): Couldnt download data from the given url. Could indicate API problem.")
                 }
             }
         })
@@ -140,19 +169,17 @@ class MovieList: ObservableObject {
 
     }
     
-    
-    private func makeRequest(for title: String) {
-        
-        currentRequestNumber += 1
-        
-        print("making request for title: \(title)")
+    // Az első API-t használja: Egy műsor címére történő keresés IMDB találatait kapja vissza, ebből nekünk az IMDB ID a fontos, azt adjuk a második API-nak
+    private func makeRequest(for program: TVProgramme) {
+                
+        print("making request for title: \(program.title)")
         
         let headers = [
             "x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com",
             "x-rapidapi-key": "936907b99fmshb8b8ce9f592618bp14616ajsnc7cb6f502808"
         ]
 
-        let original = "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + title
+        let original = "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + program.title
         
         let encoded = original.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)
         let url = URL(string: encoded!)
@@ -172,11 +199,11 @@ class MovieList: ObservableObject {
                 if data != nil {
                     if let idRequest = try? JSONDecoder().decode(IDInfo.self, from: data!) {
                         DispatchQueue.global(qos: .userInitiated).async {
-                            print("request data for \(title)")
+                            print("request data for \(program.title)")
                             if(idRequest.titles.count > 0) {
-                                self.requestData(with: idRequest.titles[0].id)
+                                self.requestData(with: idRequest.titles[0].id, for: program)
                             } else {
-                                print("no title: \(title) found on imdb ")
+                                print("no title: \(program.title) found on imdb ")
                             }
                         }
                     }
