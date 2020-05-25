@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 struct ListView: View {
     
     @EnvironmentObject var movies: MovieList
@@ -29,4 +30,3 @@ struct ListView_Previews: PreviewProvider {
         ListView()
     }
 }
-
