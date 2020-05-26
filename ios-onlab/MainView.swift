@@ -13,10 +13,12 @@ struct MainView: View {
         TabView {
             ListView()
                 .tabItem {
+                    Image(systemName: "tv")
                     Text("on TV")
             }
             SettingsView()
                 .tabItem {
+                    Image(systemName: "gear")
                     Text("Settings")
             }
         }
