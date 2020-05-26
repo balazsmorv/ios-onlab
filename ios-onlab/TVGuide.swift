@@ -57,18 +57,6 @@ class TVGuide: NSObject, XMLParserDelegate {
                 continue
             }
             
-//            var alreadyInArray = false // a
-//            for programOnTV in programsOnTV {
-//                if programOnTV.title.trimmingCharacters(in: .whitespacesAndNewlines) == program.title.trimmingCharacters(in: .whitespacesAndNewlines) {
-//                    alreadyInArray = true
-//                    break
-//                }
-//            }
-//            if alreadyInArray {
-//                continue
-//            }
-            
-            
             let currentDateTime = Date()
             // a műsort eltároljuk a függvényvisszatérési tömbbe, ha épp most van adásban (azt itt már tudjuk, hogy releváns csatornán van)
             if currentDateTime > program.startTime && currentDateTime < program.finishTime {

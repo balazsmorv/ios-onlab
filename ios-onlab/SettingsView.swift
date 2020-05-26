@@ -22,7 +22,7 @@ struct Selector: View {
         HStack {
             Text(self.row.name)
                 .font(.title)
-                .fontWeight(.bold)
+                .fontWeight(.regular)
             Spacer()
             if self.isSelected {
                 Text("✔️")
