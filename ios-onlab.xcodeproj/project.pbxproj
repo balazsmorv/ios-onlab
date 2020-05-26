@@ -27,7 +27,7 @@
 		32845EE92454AA1200B9446A /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		32845EED2454AA2B00B9446A /* IDInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDInfo.swift; sourceTree = "<group>"; };
 		32845EEF2454AA3700B9446A /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		A419BA872416E4AF00D24472 /* ios-onlab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-onlab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A419BA872416E4AF00D24472 /* TVDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A419BA8A2416E4AF00D24472 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A419BA8C2416E4AF00D24472 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A419BA902416E4B100D24472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		A419BA882416E4AF00D24472 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A419BA872416E4AF00D24472 /* ios-onlab.app */,
+				A419BA872416E4AF00D24472 /* TVDB.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,7 +118,7 @@
 			);
 			name = "ios-onlab";
 			productName = "ios-onlab";
-			productReference = A419BA872416E4AF00D24472 /* ios-onlab.app */;
+			productReference = A419BA872416E4AF00D24472 /* TVDB.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -331,7 +331,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hu.bme.aut.ios-onlab";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TVDB;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -355,7 +355,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hu.bme.aut.ios-onlab";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TVDB;
 				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

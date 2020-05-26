@@ -35,7 +35,7 @@ class Movie: Codable, Identifiable, ObservableObject {
     let type: String
     let id = UUID()
     
-    @Published var image: UIImage = #imageLiteral(resourceName: "posterNotFound")
+    @Published var image: UIImage = #imageLiteral(resourceName: "imagenotfound")
     
     init() {
         title = "Tina feneke"

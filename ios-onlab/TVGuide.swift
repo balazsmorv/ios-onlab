@@ -39,7 +39,7 @@ class TVGuide: NSObject, XMLParserDelegate {
     
     // Kódból beállítja azokat a csatornákat amiket a feéhaszáló szeretne látni. Időleges megoldás, a véglegesben a user a SettingsView-ben fogja tudni ezeket kiválasztani
     func setUserSelectedChannels() {
-        let preferredChannels = ["AXN CE", "Cinemax", "Film Mania", "Film+", "Mozi+", "RTL Klub", "RTL2", "TV2"]
+        let preferredChannels = ["AXN CE", "Cinemax", "Film Mania", "Film+", "Mozi+", "RTL Klub", "RTL2", "TV2", "Cool", "Film Mania", "Film Now", "Filmbox Plus", "Filmbox Premium", "Filmbox Family", "Filmbox Basic", "FilmCafe", "HBO HU", "HBO2", "HBO3", "Nicktoons", "Paramount Channel", "Viasat3", "Viasat6"]
         for channel in allChannels {
             if preferredChannels.contains(channel.name) {
                 userSelectedChannels.append(channel)
