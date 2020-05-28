@@ -82,6 +82,16 @@ class TVGuide: NSObject, XMLParserDelegate {
                 }
                 
                 do {
+                    let paths = NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)
+                    let appSupportDir = paths[0]
+                    print("appSupportDir folder path: \(appSupportDir)")
+                    if FileManager.default.fileExists(atPath: appSupportDir + "/guide.xml"){
+                        do{
+                            try FileManager.default.removeItem(at: directory)
+                        }catch let error {
+                            print("error occurred, here are the details:\n \(error)")
+                        }
+                    }
                     try FileManager.default.copyItem(at: tempLocalUrl, to: directory)
                     let lastRefresh = Date()
                     // Perzisztensen eltárolja az utolsó frissítés idejét

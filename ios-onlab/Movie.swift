@@ -38,9 +38,9 @@ class Movie: Codable, Identifiable, ObservableObject {
     @Published var image: UIImage = #imageLiteral(resourceName: "imagenotfound")
     
     init() {
-        title = "Tina feneke"
-        channel = "TinaTV"
-        year = "Year"
+        title = "Cím"
+        channel = "Adó"
+        year = "2020"
         rated = "Rated"
         released = "Released"
         runtime = "Runtime"
@@ -53,7 +53,7 @@ class Movie: Codable, Identifiable, ObservableObject {
         country = "Country"
         awards = "Awards"
         poster = "Poster"
-        IMDBRating = "100"
+        IMDBRating = "10"
         Metascore = "Metascore"
         IMDBNumberOfVotes = "imdbVotes"
         IMDBid = "imdbID"
@@ -152,8 +152,10 @@ class MovieList: ObservableObject {
                         movie.getPosterImage(from: movie.poster)
                         movie.channel = program.channel
                         DispatchQueue.main.async {
-                            self.items.append(movie)
-                            self.items.sort {$0.IMDBRating > $1.IMDBRating}
+                            if movie.IMDBRating != "N/A" {
+                                self.items.append(movie)
+                                self.items.sort {$0.IMDBRating > $1.IMDBRating}
+                            }
                         }
                     } else {
                         print("Movie.requestData(with imdbID: \(imdbID)): couldnt decode JSON data to Movie instance")
