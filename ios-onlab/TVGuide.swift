@@ -219,13 +219,14 @@ struct Channel: Identifiable, Equatable {
 }
 
 // TV műsor egy eleméről tárol infókat (cím, csatorna, kezdési- és befejezési idő)
-struct TVProgramme {
+class TVProgramme {
     var startTime: Date
     var finishTime: Date
     var channel: String
     var title: String
     var description: String
     var imdbId = ""
+    var titleMatchingDepth = 0
     
     init(startTime: String, finishTime: String, channel: String, title: String, desc: String) {
         self.title = title
@@ -284,5 +285,9 @@ struct TVProgramme {
         self.finishTime = userCalendar.date(from: dateComponents)!
 
         //print("New program: \(self.title) on \(self.channel) from \(self.startTime) until \(self.finishTime)")
+    }
+    
+    func addDepth() {
+        self.titleMatchingDepth += 1
     }
 }

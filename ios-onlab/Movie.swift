@@ -127,6 +127,26 @@ class MovieList: ObservableObject {
             }
         }
     }
+    
+    func tryWithModifiedTitle(program: TVProgramme) {
+        print("trying with modified title")
+        let title = program.title
+        if let dashIndex = title.firstIndex(where: {$0 == "–"}) {
+            print("found dash")
+            let indexBeforeDash = title.index(before: dashIndex)
+            if let asciiValue = title[indexBeforeDash].asciiValue {
+                if ((asciiValue > 64 && asciiValue < 91) || (asciiValue > 96 && asciiValue < 123)) {
+                    let modifiedTVProgram = program
+                    modifiedTVProgram.title = String(title[title.startIndex ..< dashIndex])
+                    print("-------------modified title: \(modifiedTVProgram.title)")
+                    program.addDepth()
+                    self.makeRequest(for: modifiedTVProgram)
+                }
+            }
+        } else {
+            print("didint find dash in title: \(program.title)")
+        }
+    }
 
     // 2. API: kapott IMDB ID-ra keres rá IMDB-n, és a visszakapott adatokból Movie példányt készít, eltárolja őket az items tömbben
     private func requestData(with imdbID: String, for program: TVProgramme) {
@@ -206,6 +226,9 @@ class MovieList: ObservableObject {
                                 self.requestData(with: idRequest.titles[0].id, for: program)
                             } else {
                                 print("no title: \(program.title) found on imdb ")
+                                if program.titleMatchingDepth < 1 {
+                                    self.tryWithModifiedTitle(program: program)
+                                }
                             }
                         }
                     }
@@ -216,4 +239,17 @@ class MovieList: ObservableObject {
         dataTask.resume()
     }
     
+}
+
+
+
+extension UInt8 {
+    
+    static func >(uint: UInt8, int: Int) -> Bool {
+        return Int(uint) > int
+    }
+    
+    static func <(uint: UInt8, int: Int) -> Bool {
+        return Int(uint) < int
+    }
 }
